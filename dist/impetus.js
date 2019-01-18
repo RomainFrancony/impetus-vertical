@@ -173,10 +173,10 @@
          */
         function cleanUpRuntimeEvents() {
             // Remove all touch events added during 'onDown' as well.
-            document.removeEventListener('touchmove', onMove, getPassiveSupported() ? { passive: false } : false);
+            document.removeEventListener('touchmove', onMove, getPassiveSupported() ? { passive: true } : false);
             document.removeEventListener('touchend', onUp);
             document.removeEventListener('touchcancel', stopTracking);
-            document.removeEventListener('mousemove', onMove, getPassiveSupported() ? { passive: false } : false);
+            document.removeEventListener('mousemove', onMove, getPassiveSupported() ? { passive: true } : false);
             document.removeEventListener('mouseup', onUp);
         }
 
@@ -249,7 +249,6 @@
          * @param  {Object} ev Normalized event
          */
         function onMove(ev) {
-            ev.preventDefault();
             var event = normalizeEvent(ev);
 
             if (pointerActive && event.id === pointerId) {
